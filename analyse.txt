@@ -1,0 +1,64 @@
+
+Menu:
+	1. Doit ajouter et afficher des PlatAuMenu
+
+PlatAuMenu :
+	1. ConcreteObject
+	2. Initialise les variables code, desciption, prix
+	3. Liste d'ingredient et leur quantite (Unite de quantite varie selon si l'ingredient est liquide ou solide)
+	
+PlatSante :
+	1. Instance de PlatAuMenu
+	2. Initialise les variables calorie, gras, chol
+
+Facture : 
+	1. Doit ajouter des PlatChoisi avec un code de Menu
+	2. Peut avoir 3 etat different (Ouvert, Fermer, Payer)
+
+EtatFacture : 
+	1. Interface pour les different Etat de Facture
+	
+	Ouvert : Etat initiale
+			 Peux passer a l'Etat Ouvert ou Fermer ou Payer
+			 Afficher facture, Ajouter un PlatChoisi, Selectionner un PlatChoisi, retirer un PlatChoisi
+	Fermer : Peux-passer a l'etat Ouvert, Fermer, Payer
+			 Affiche les montant sous-total avant taxe, taxe et total avec taxe
+	Payer :  Etat final, ne peux plus changer d'Etat
+			 Affiche les montant sous-total avant taxe, taxe et total avec taxe
+	
+PlatChoisi :
+	1. Contient une reference a un PlatAuMenu (Provient de l'array dans Menu)
+	2. Contient une quantite
+	3. Possede l'EtatPlat pour gerer les actions possible
+
+
+-------------------------Nouvelle fonctionnalite-----------------------------
+
+PlatEnfant : 
+	1. Instance de PlatAuMenu
+	2. Initialise les variables proportions
+	
+Ingredient : 
+	1. Structure d'heritage
+	2. Objet determinant s'il est possible de preparer un plat avant l'ajout a une facture
+	3. Etat liquide ou solide """Determiner comment le gerer"""
+	
+	Fruit :
+	Legume :
+	Viande :
+	Laitier :
+	Epice :
+	
+Chef :
+	1. Est notifier lors d'ajout de PlatChoisi a une Facture
+	2. Modifi les EtatPlat
+	
+EtatPlat :
+	1. Etat de preparation des plats
+	
+	Commande : EtatPlat initiale, peux passer a l'etat EnPreparation ou ImpossibleDeServir
+	EnPreparation : peux-passer a l'etat Termine
+	Termine : peux-passer a l'etat Servi
+	Servi : EtatPlat final, """A determiner si on peut retourner a l'EtatPlat EnPreparation"""
+	ImpossibleDeServir : Ne peux pas etre ajouter a une facture
+

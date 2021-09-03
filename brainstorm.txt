@@ -1,0 +1,6 @@
+Desing paterns:
+	State : EtatPlat et PlatChoisi
+	State : EtatFacture et Facture
+	Observer : Chef et Facture
+	//Bridge : Ingredient
+	//Factory : PlatChoisi
