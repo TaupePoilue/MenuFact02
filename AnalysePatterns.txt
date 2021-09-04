@@ -1,0 +1,98 @@
+Analyse des Modèles de Conception Java
+
+1. Qu'est ce qu'un Modèles de Conception?
+	- Un Modèles de Conception est une schéma de solution à un problème courant de programmation.
+
+2. Quels sont les type de Modèles de Conception?
+	- Provenant du livre Design 'Patterns - Elements of Reusable Object-Oriented Software' écrit par The Gang of Four
+	  il y à trois type de Modèles de Conception regroupant 23 Modèles.
+	  <Modèles de création> <Modèles de structure> <Modèles de comportement>
+	  
+Brève description par Modèle:
+
+1. Factory Pattern <Création>
+
+	Caractérisique:
+		- Le plus utilisé en Java.
+		- Créer des objets en cachant la logique de création.
+		
+2. Abstact Factory Pattern <Création>
+
+		Caractérisique:
+		- Factory of Factories.
+		- Pour créer une fabrique d'objets liés sans spécifier explicitement leurs classes.
+		
+3. Singleton Pattern <Création>
+
+		Caractérisique:
+		- Simple.
+		- Amiliorer une seul classe.
+		- Créer un objet en s'assurant qu'ancun autre objet de la sorte soit créer.
+		- Permet d'accèder à l'objet sans l'instancier.
+		
+4. Builder Pattern <Création> (UTILE POUR LA COMMANDE DES PLATS ET LA GESTION DES RESSOURCES <Aliments>!)
+
+		Caractérisique:
+		- Construit un objet complexe en utilisant des objets simples et en utilisant une approche étape par étape.
+		- Ce générateur est indépendant des autres objets.
+
+5. Prototype Pattern <Création>
+
+		Caractérisique:
+		- Créer un objet en double tout en gardant à l'esprit les performances.
+		- Interface prototype qui indique de créer un clone de l'objet actuel.
+		- Appliquer lorsquer l'opération de créer l'objet est couteuse.
+		
+6. Adapter Pattern <Structure>
+
+		Caractérisique:
+		- Implique une classe unique qui est responsable de joindre des fonctionnalités d'interfaces indépendantes ou incompatibles.
+		
+7. Bridge Pattern <Structure>
+
+		Caractérisique:
+		- Une interface qui agit comme un pont qui rend la fonctionnalité des classes concrètes indépendante des classes d'implémentation d'interface.
+		
+8. Filter Pattern <Structure>
+
+		Caractérisique:
+		- Permet aux développeurs de filtrer un ensemble d'objets à l'aide de différents critères et de les enchaîner de manière découplée via des opérations logiques.
+		- Combine plusieurs critères pour obtenir des critères uniques
+		
+9. Composite Pattern <Structure> (UTILITÉ CRÉATION DE PLATS!!!)
+
+		Caractérisique:
+		- Utilisé lorsque nous devons traiter un groupe d'objets de la même manière qu'un seul objet.
+		- Creates a tree structure of group of objects.
+		- Crée une classe qui contient un groupe de ses propres objets.
+		- Cette classe fournit des moyens de modifier son groupe de mêmes objets.
+
+10. Decorator Pattern <Structure> 
+
+		Caractérisique:
+		- Crée une classe de décorateur qui enveloppe la classe d'origine et fournit des fonctionnalités supplémentaires en gardant intacte la signature des méthodes de la classe.
+		
+11. Facade Pattern <Structure> 
+
+		Caractérisique:
+		- Implique une classe unique qui fournit les méthodes simplifiées requises par le client et délègue les appels aux méthodes des classes système existantes.
+		- Masque les complexités du système et fournit une interface au client à l'aide de laquelle le client peut accéder au système.
+		
+12. Flyweight Pattern <Structure> 
+
+		Caractérisique:
+		- Réduire le nombre d'objets créés.
+		- Diminuer l'empreinte mémoire.
+		- Augmenter les performances.
+		- Réutiliser des objets similaires déjà existants en les stockant et crée un nouvel objet lorsqu'aucun objet correspondant n'est trouvé.
+		
+13. Proxy Pattern <Structure> 
+
+		Caractérisique:
+		- Créer un objet ayant un objet d'origine pour interfacer sa fonctionnalité avec le monde extérieur.
+		
+14. Chain of Responsibility Pattern <Structure> (PEUT ËTRE UTILE POUR LA GESTION DES ERREURS?)
+
+		Caractérisique:
+		- Chaque récepteur contient une référence à un autre récepteur. Si un objet ne peut pas traiter la demande, il la transmet au destinataire suivant et ainsi de suite
+		
