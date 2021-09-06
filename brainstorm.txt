@@ -4,3 +4,5 @@ Desing paterns:
 	Observer : Chef et Facture
 	//Bridge : Ingredient
 	//Factory : PlatChoisi
+	Singleton : Menu
+	
