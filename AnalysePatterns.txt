@@ -96,17 +96,3 @@ Brève description par Modèle:
 		Caractérisique:
 		- Chaque récepteur contient une référence à un autre récepteur. Si un objet ne peut pas traiter la demande, il la transmet au destinataire suivant et ainsi de suite
 		
-15. Command <Behavioral>
-		Caractérisique:
-		- Créer une classe d'objet pour des actions.
-		- Utile lorsqu'il y a plusieurs objets pouvant executer une commande similaire. (ex: Boutton copier, Shortcut copier et Menu copier)
-		- Utile lorsqu'on veut faire une queue d'action à exécuter
-
-16. Iterator <Behavioral>
-		Caractérisique:
-		- Permet de itérer sur plusieurs collection d'objet ayant une structure différentes (ex: liste, arbre, graphe) 
-			avec un seul objet nommé Iterator.
-		- Évite d'avoir de l'imcompatibilité lorsqu'on décide de changer de structure.
-		- Permet de faire abstraction de la structure d'une collection avec laquelle on travail.
-
-17. 
