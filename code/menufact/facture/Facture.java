@@ -25,6 +25,50 @@ public class Facture {
     private final double TPS = 0.05;
     private final double TVQ = 0.095;
 
+    /**Definition des possibles etats de Facture*/
+
+    public class FactureEtat {
+        public void ouvrir(){}
+
+        public void fermer(){}
+
+        public void payer(){}
+
+        public void selectionnerPlat(PlatChoisi plat){}
+
+        public void retirerPlat(){}
+
+        public void ajouterPlat(PlatChoisi plat) throws FactureException { throw new FactureException("Un plat peut seulement être ajouter à une facture OUVERTE."); }
+    }
+
+    public class FactureFermer extends FactureEtat {
+
+    }
+
+    public class FactureOuverte extends FactureEtat {
+
+        @Override
+        public void ouvrir() {}
+
+        @Override
+        public void fermer() {
+            changerEtat(new FactureFermer());
+        }
+
+        @Override
+        public void payer() {
+            changerEtat(new FacturePayee());
+        }
+
+        @Override
+        public void ajouterPlat(PlatChoisi plat) {
+            platchoisi.add(plat);
+        }
+    }
+
+    public class FacturePayee extends FactureEtat {
+    }
+
     /**
      *
      * @param client le client de la facture
@@ -75,14 +119,14 @@ public class Facture {
      */
     public void payer()
     {
-       etat = FactureEtat.PAYEE;
+       etat.payer();
     }
     /**
      * Permet de chager l'état de la facture à FERMEE
      */
     public void fermer()
     {
-       etat = FactureEtat.FERMEE;
+       etat.fermer();
     }
 
     /**
@@ -91,10 +135,7 @@ public class Facture {
      */
     public void ouvrir() throws FactureException
     {
-        if (etat == FactureEtat.PAYEE)
-            throw new FactureException("La facture ne peut pas être reouverte.");
-        else
-            etat = FactureEtat.OUVERTE;
+        etat.ouvrir();
     }
 
     /**
@@ -112,7 +153,7 @@ public class Facture {
      */
     public Facture(String description) {
         date = new Date();
-        etat = FactureEtat.OUVERTE;
+        etat = new FactureOuverte();
         courant = -1;
         this.description = description;
     }
@@ -124,10 +165,7 @@ public class Facture {
      */
     public void ajoutePlat(PlatChoisi p) throws FactureException
     {
-        if (etat == FactureEtat.OUVERTE)
-            platchoisi.add(p);
-        else
-            throw new FactureException("On peut ajouter un plat seulement sur une facture OUVERTE.");
+        etat.ajouterPlat(p);
     }
 
     /**
@@ -178,5 +216,9 @@ public class Facture {
         factureGenere += "          Le total est de:   " + total() + "\n";
 
         return factureGenere;
+    }
+
+    public void changerEtat(FactureEtat nouvelEtat){
+        this.etat = nouvelEtat;
     }
 }
