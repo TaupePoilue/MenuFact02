@@ -27,9 +27,8 @@ public class TestMenuFact02 {
         PlatSante ps4 = new PlatSante(13,"PlatSante3",40,11,11,11);
         PlatSante ps5 = new PlatSante(14,"PlatSante4",50,11,11,11);
 
-
-        Menu m1 = new Menu("menufact.Menu 1");
-        Menu m2 = new Menu("menufact.Menu 2");
+        Menu m1 = Menu.getInstance("menufact.Menu 1");
+        Menu m2 = Menu.getInstance("menufact.Menu 2");
 
         Facture f1 = new Facture("Ma facture");
 
