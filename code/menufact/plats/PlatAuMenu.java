@@ -1,6 +1,6 @@
 package menufact.plats;
 
-public class PlatAuMenu {
+public class PlatAuMenu implements Plat {
     private int code;
     private String description;
     private double prix;
@@ -10,6 +10,7 @@ public class PlatAuMenu {
         this.description = description;
         this.prix = prix;
     }
+    public void CreerPlat(){}
 
     public PlatAuMenu() {
     }
