@@ -1,5 +1,10 @@
 package menufact.plats;
 
+import ingredients.Fruit;
+import ingredients.IngredientInventaire;
+import ingredients.Liquide;
+import ingredients.Solide;
+
 public class TestPlat {
     public static void main(String[] args) {
 
@@ -9,11 +14,11 @@ public class TestPlat {
             System.out.println("===Creation de 3 plats===");
 
             PlatFactory platFactory = new PlatFactory();
-            Plat plat1 = platFactory.creerPlat(1,"Frite",12.50);
+            PlatAuMenu plat1 = platFactory.creerPlat(1,"Frite",12.50);
             System.out.println("plat1: " + plat1.toString());
-            Plat plat2 = platFactory.creerPlatEnfant(2,"Tomate",12.50,0.5);
+            PlatAuMenu plat2 = platFactory.creerPlatEnfant(2,"Tomate",12.50,0.5);
             System.out.println("plat2: " + plat2.toString());
-            Plat plat3 = platFactory.creerPlatSante(3,"Apple",12.50,50,40,10);
+            PlatAuMenu plat3 = platFactory.creerPlatSante(3,"Apple",12.50,50,40,10);
             System.out.println("plat3: " + plat3.toString());
             System.out.println();
             //CODE
@@ -37,9 +42,9 @@ public class TestPlat {
             System.out.println("plat3 Description: " + plat3.getDescription());
             System.out.println();
             System.out.println("===setDescription des 3 plats===");
-            plat1.setDescription("Manger");
-            plat2.setDescription("Manger");
-            plat3.setDescription("Manger");
+            plat1.setDescription("Banane et Pomme");
+            plat2.setDescription("Diner");
+            plat3.setDescription("Souper");
             System.out.println("plat1 Description: " + plat1.getDescription());
             System.out.println("plat2 Description: " + plat2.getDescription());
             System.out.println("plat3 Description: " + plat3.getDescription());
@@ -62,6 +67,52 @@ public class TestPlat {
             System.out.println("plat1: " + plat1.toString());
             System.out.println("plat2: " + plat2.toString());
             System.out.println("plat3: " + plat3.toString());
+            System.out.println();
+            System.out.println("===Test RECETTE==="+ newLine);
+            Fruit banane = new Fruit("Banane", "Jaune", new Solide());
+            Fruit pomme = new Fruit("Pomme", "Rouge", new Solide());
+            Fruit ananas = new Fruit("Ananas", "Jaune", new Solide());
+            Fruit jusDePomme = new Fruit("Jus de Pomme", "Bio", new Liquide());
+
+            System.out.println("===Creation recette plat1===");
+            plat1.ajoutIngredientRecette(banane,3);
+            plat1.ajoutIngredientRecette(pomme,2);
+            System.out.println("plat1: " + plat1.toString());
+            plat1.printRecette();
+            System.out.println();
+            System.out.println("===Changement 5 pommes===");
+            plat1.ajoutIngredientRecette(pomme,5);
+            plat1.printRecette();
+            System.out.println();
+            System.out.println("===Ajout 5 ananas===");
+            plat1.ajoutIngredientRecette(ananas,5);
+            plat1.printRecette();
+            System.out.println();
+
+            System.out.println("===Creation Inventaire===");
+            IngredientInventaire storage = IngredientInventaire.getInstance();
+            storage.setQuantite(banane, 20);
+            storage.setQuantite(pomme, 22);
+            storage.setQuantite(ananas, 20);
+            storage.setQuantite(jusDePomme, 0);
+            System.out.println(storage.toString());
+            System.out.println();
+
+            System.out.println("===Verifier que l'on peut faire la recette===");
+            System.out.println("Nous avons les ingredients: " + storage.verifierInventaire(plat1.getRecette()));
+            System.out.println("===Faire la recette (Soustraire)===");
+            storage.soustraireQuantite(plat1.getRecette());
+            System.out.println(storage.toString());
+            System.out.println();
+
+            System.out.println("===Ajout 1 jusDePomme===");
+            plat1.ajoutIngredientRecette(jusDePomme,1);
+            plat1.printRecette();
+            System.out.println();
+            System.out.println("===Verifier que l'on peut faire la recette===");
+            System.out.println("Nous avons les ingredients: " + storage.verifierInventaire(plat1.getRecette()));
+
+
 
 
 
