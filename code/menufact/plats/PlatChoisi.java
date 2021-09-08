@@ -1,5 +1,6 @@
 package menufact.plats;
 
+import ingredients.IngredientInventaire;
 import menufact.plats.EtatPlat.*;
 
 public class PlatChoisi {
@@ -11,7 +12,12 @@ public class PlatChoisi {
         this.plat = plat;
         this.quantite = quantite;
 
-        this.etat = new PlatCommande(this);
+        if(IngredientInventaire.getInstance().verifierInventaire(plat.getRecette())){
+            this.etat = new PlatCommande(this);
+        }else
+        {
+            this.etat = new PlatImpossibleAPreparer(this);
+        }
     }
 
     @Override

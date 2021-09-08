@@ -1,8 +1,10 @@
 package menufact;
 
+import ingredients.*;
 import menufact.facture.exceptions.FactureException;
 import menufact.exceptions.MenuException;
 import menufact.facture.Facture;
+import menufact.plats.PlatAuMenu;
 import menufact.plats.PlatRegulier;
 import menufact.plats.PlatChoisi;
 import menufact.plats.PlatSante;
@@ -35,6 +37,7 @@ public class TestMenuFact02 {
 
         Client c1 = new Client(1,"Mr Client","1234567890");
 
+        t.test13_CreerInventaire();
 
         t.test1_AffichePlatsAuMenu(trace, p1,p2,p3,p4,p5);
         t. test2_AffichePlatsSante(trace, ps1,ps2,ps3,ps4,ps5);
@@ -372,5 +375,77 @@ public class TestMenuFact02 {
         }catch (FactureException fe){
             System.out.println(fe.getMessage());
         }
+    }
+
+    private void test13_CreerInventaire(){
+        try{
+            System.out.println("===test13_CreerInventaire");
+            Fruit banane = new Fruit("Banane", "Jaune", new Solide());
+            Fruit pomme = new Fruit("Pomme", "Rouge", new Solide());
+            Fruit ananas = new Fruit("Ananas", "Jaune", new Solide());
+            Fruit jusDePomme = new Fruit("Jus de Pomme", "Bio", new Liquide());
+            Fruit compotteDePomme = new Fruit("Compotte de Pomme", "Maison", new Liquide());
+
+            Viande poulet = new Viande("Poulet","Poitrine", new Solide());
+            Viande boeuf = new Viande("Boeuf","Cote", new Solide());
+            Viande bouillontDePoulet = new Viande("Bouillon de Poulet","Clair", new Liquide());
+            Viande bouillontDeBoeuf = new Viande("Bouillon de Boeuf","Fonce", new Liquide());
+
+            Legume poivron = new Legume("Poivron","Vert", new Solide());
+            Legume tomate = new Legume("Tomate","Italienne", new Solide());
+            Legume sauceTomate = new Legume("Sauce Tomate","Maison", new Liquide());
+            Legume huileOlive = new Legume("Huile d'olive","Extra Vierge", new Liquide());
+
+            Laitier beurre = new Laitier("Beurre","Demi-Sel", new Solide());
+            Laitier fromage = new Laitier("Fromage","Suisse", new Solide());
+            Laitier lait = new Laitier("Lait","2%", new Liquide());
+            Laitier creme = new Laitier("Creme","15%", new Liquide());
+
+            Epice sel = new Epice("Sel","De Mer", new Solide());
+            Epice poivre = new Epice("Poivre","Noir", new Solide());
+            Epice tabasco = new Epice("Tabasco","Epice", new Liquide());
+            Epice sauceSoja = new Epice("Sauce Soja","Du Quebec", new Liquide());
+
+            sel.setDescription("Kasher");
+            sel.setNom("Demi-Sel");
+            sel.setEtat(new Liquide());
+            sel.setTypeIngredient(TypeIngredient.FRUIT);
+
+            sel = new Epice("Sel","De Mer", new Solide());
+
+            IngredientInventaire storage = IngredientInventaire.getInstance();
+            //FRUIT
+            storage.setQuantite(banane, 20);
+            storage.setQuantite(pomme, 22);
+            storage.setQuantite(ananas, 20);
+            storage.setQuantite(jusDePomme, 22);
+            storage.setQuantite(compotteDePomme, 20);
+            //VIANDE
+            storage.setQuantite(poulet, 22);
+            storage.setQuantite(boeuf, 20);
+            storage.setQuantite(bouillontDePoulet, 22);
+            storage.setQuantite(bouillontDeBoeuf, 20);
+            //LEGUME
+            storage.setQuantite(poivron, 22);
+            storage.setQuantite(tomate, 20);
+            storage.setQuantite(sauceTomate, 22);
+            storage.setQuantite(sauceSoja, 20);
+            //LAITIER
+            storage.setQuantite(beurre, 22);
+            storage.setQuantite(fromage, 20);
+            storage.setQuantite(lait, 22);
+            storage.setQuantite(creme, 20);
+            //EPICE
+            storage.setQuantite(sel, 22);
+            storage.setQuantite(poivre, 20);
+            storage.setQuantite(tabasco, 22);
+            storage.setQuantite(sauceSoja, 20);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void test14_AjouterRecette(PlatAuMenu platAuMenu){
+        // TO-DO
     }
 }
