@@ -1,5 +1,6 @@
 package menufact.facture;
 
+import menufact.Chef;
 import menufact.Client;
 import menufact.facture.exceptions.FactureException;
 import menufact.plats.PlatChoisi;
@@ -189,6 +190,7 @@ public class Facture {
     public void ajoutePlat(PlatChoisi p) throws FactureException
     {
         etat.ajouterPlat(p);
+        notifierChef(p);
     }
 
     public void selectionnerPlat(PlatChoisi plat) throws FactureException
@@ -200,6 +202,11 @@ public class Facture {
     {
         etat.retirerPlat();
     }
+    
+    public void notifierChef(PlatChoisi p){
+        Chef.getInstance().recevoirCommande(p);
+    }
+
     /**
      *
      * @return le contenu de la facture en chaîne de caracteres
