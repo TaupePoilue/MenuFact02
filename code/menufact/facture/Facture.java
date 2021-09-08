@@ -21,7 +21,6 @@ public class Facture {
     private int courant;
     private Client client;
 
-
     /**********************Constantes ************/
     private final double TPS = 0.05;
     private final double TVQ = 0.095;
@@ -29,28 +28,45 @@ public class Facture {
     /**Definition des possibles etats de Facture*/
 
     public class FactureEtat {
-        public void ouvrir() throws FactureException {
-            throw new FactureException("Action imposible");
-        }
+        public void ouvrir() throws FactureException {}
 
-        public void fermer() throws  FactureException{
-            throw new FactureException("Action imposible");
-        }
+        public void fermer() throws  FactureException{}
 
-        public void payer() throws FactureException{
-            throw new FactureException("Action imposible");
-        }
+        public void payer() throws FactureException{}
 
-        public void selectionnerPlat(PlatChoisi plat) throws  FactureException {
-            throw new FactureException("Action imposible");
-        }
+        public void selectionnerPlat(int index) throws  FactureException {}
 
-        public void retirerPlat() throws FactureException{
-            throw new FactureException("Action imposible");
-        }
+        public void retirerPlat() throws FactureException{}
 
         public void ajouterPlat(PlatChoisi plat) throws FactureException {
             throw new FactureException("Un plat peut seulement être ajouter à une facture OUVERTE."); }
+
+        public String genererFacture(){
+            String lesPlats = new String();
+            String factureGenere = new String();
+
+            int i =1;
+
+
+            factureGenere =   "Facture generee.\n" +
+                    "Date:" + date + "\n" +
+                    "Description: " + description + "\n" +
+                    "Client:" + client.getNom() + "\n" +
+                    "Les plats commandes:" + "\n" + lesPlats;
+
+            factureGenere += "Seq   Plat         Prix   Quantite\n";
+            for (PlatChoisi plat : platchoisi)
+            {
+                factureGenere +=  i + "     " + plat.getPlat().getDescription() +  "  " + plat.getPlat().getPrix() +  "      " + plat.getQuantite() + "\n";
+                i++;
+            }
+
+            factureGenere += "          TPS:               " + tps() + "\n";
+            factureGenere += "          TVQ:               " + tvq() + "\n";
+            factureGenere += "          Le total est de:   " + total() + "\n";
+
+            return factureGenere;
+        }
     }
 
     public class FactureFermer extends FactureEtat {
@@ -65,6 +81,26 @@ public class Facture {
         @Override
         public void payer() throws FactureException {
             changerEtat(new FacturePayee());
+        }
+
+        @Override
+        public void ajouterPlat(PlatChoisi plat) throws FactureException {
+            throw new FactureException("Impossible d'ajouter un plat a une facture FERMEE; Veuillez la reouvrir");
+        }
+
+        @Override
+        public void selectionnerPlat(int index) throws FactureException {
+            throw new FactureException("Impossible de selectionner un plat a une facture FERMEE; Veuillez la reouvrir");
+        }
+
+        @Override
+        public void retirerPlat() throws FactureException {
+            throw new FactureException("Impossible de retirer un plat a une facture FERMEE; Veuillez la reouvrir");
+        }
+
+        @Override
+        public String genererFacture() {
+            return super.genererFacture() + "\n" + "Etat de la facture: FERMEE";
         }
     }
 
@@ -87,10 +123,76 @@ public class Facture {
         public void ajouterPlat(PlatChoisi plat) {
             platchoisi.add(plat);
         }
+
+        @Override
+        public void selectionnerPlat(int index) throws FactureException{
+            //TO DO
+            throw new FactureException("SelectionnerPlat pas encore implemente");
+        }
+
+        @Override
+        public void retirerPlat() throws FactureException {
+            if (courant == -1)
+            {
+                throw new FactureException("Impossible de retirer: Aucun plat de selectionne");
+            }
+            platchoisi.remove(courant);
+        }
+
+        @Override
+        public String genererFacture() {
+            String lesPlats = new String();
+            String factureGenere = new String();
+
+            int i =1;
+
+            factureGenere =   "Facture generee.\n" +
+                    "Date:" + date + "\n" +
+                    "Description: " + description + "\n" +
+                    "Client:" + client.getNom() + "\n" +
+                    "Les plats commandes:" + "\n" + lesPlats + "\n" +
+                    "Etat de la facture : OUVERTE";
+
+            return factureGenere;
+        }
     }
 
     public class FacturePayee extends FactureEtat {
-        
+
+        @Override
+        public void payer() throws FactureException {
+            throw new FactureException("Impossible de paye une facture deja payee");
+        }
+
+        @Override
+        public void ouvrir() throws FactureException {
+            throw new FactureException("Impossible d'ouvrir une facture payee");
+        }
+
+        @Override
+        public void fermer() throws FactureException {
+            throw new FactureException("Impossible de fermer une facture payee");
+        }
+
+        @Override
+        public void ajouterPlat(PlatChoisi plat) throws FactureException {
+            throw new FactureException("Impossible d'ajouter un plat a une facture PAYEE");
+        }
+
+        @Override
+        public void selectionnerPlat(int index) throws FactureException {
+            throw new FactureException("Impossible de selectionner un plat a une facture PAYEE");
+        }
+
+        @Override
+        public void retirerPlat() throws FactureException {
+            throw new FactureException("Impossible de retirer un plat a une facture PAYEE");
+        }
+
+        @Override
+        public String genererFacture() {
+            return super.genererFacture() + "\n" + "Etat de la facture: PAYEE";
+        }
     }
 
     /**
@@ -189,13 +291,17 @@ public class Facture {
      */
     public void ajoutePlat(PlatChoisi p) throws FactureException
     {
+        if(p.toString().equals("PlatImposibleAPreparer")){
+            throw new FactureException("Imposible d'ajouter le plat a la facture; Plat imposible a preparer");
+        }
+
         etat.ajouterPlat(p);
         notifierChef(p);
     }
 
-    public void selectionnerPlat(PlatChoisi plat) throws FactureException
+    public void selectionnerPlat(int index) throws FactureException
     {
-        etat.selectionnerPlat(plat);
+        etat.selectionnerPlat(index);
     }
 
     public void retirerPlat() throws FactureException
@@ -231,30 +337,7 @@ public class Facture {
      */
     public String genererFacture()
     {
-        String lesPlats = new String();
-        String factureGenere = new String();
-
-        int i =1;
-
-
-        factureGenere =   "Facture generee.\n" +
-                          "Date:" + date + "\n" +
-                          "Description: " + description + "\n" +
-                          "Client:" + client.getNom() + "\n" +
-                          "Les plats commandes:" + "\n" + lesPlats;
-
-        factureGenere += "Seq   Plat         Prix   Quantite\n";
-        for (PlatChoisi plat : platchoisi)
-        {
-            factureGenere +=  i + "     " + plat.getPlat().getDescription() +  "  " + plat.getPlat().getPrix() +  "      " + plat.getQuantite() + "\n";
-            i++;
-        }
-
-        factureGenere += "          TPS:               " + tps() + "\n";
-        factureGenere += "          TVQ:               " + tvq() + "\n";
-        factureGenere += "          Le total est de:   " + total() + "\n";
-
-        return factureGenere;
+        return etat.genererFacture();
     }
 
     public void changerEtat(FactureEtat nouvelEtat){

@@ -1,43 +1,33 @@
 package menufact.plats;
 
 import ingredients.Ingredient;
-import menufact.plats.PlatAuMenu;
+import ingredients.exceptions.IngredientException;
+import inventaire.Inventaire;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-public class PlatSante implements PlatAuMenu {
+public class PlatRegulier implements PlatAuMenu {
     private int code;
     private String description;
     private double prix;
-    private double kcal;
-    private double chol;
-    private double gras;
     public HashMap<Ingredient, Integer> recetteTable = new HashMap<Ingredient, Integer>();
 
-    public PlatSante(int code, String description, double prix, double kcal, double chol, double gras) {
-
+    public PlatRegulier(int code, String description, double prix) {
         this.code = code;
         this.description = description;
         this.prix = prix;
-        this.kcal = kcal;
-        this.chol = chol;
-        this.gras = gras;
     }
     public void CreerPlat(){}
 
-    public PlatSante() {
+    public PlatRegulier() {
     }
 
     @Override
     public String toString() {
-        return "menufact.plats.PlatSante{" +
-                "kcal=" + kcal +
-                ", chol=" + chol +
-                ", gras=" + gras +
-                "} {" +
+        return "menufact.plats.PlatAuMenu{" +
                 "code=" + code +
                 ", description='" + description + '\'' +
                 ", prix=" + prix +
@@ -67,9 +57,8 @@ public class PlatSante implements PlatAuMenu {
     public void setPrix(double prix) {
         this.prix = prix;
     }
-
     public void ajoutIngredientRecette(Ingredient ingredient,int quantite){
-        this.recetteTable.put(ingredient, quantite);
+            this.recetteTable.put(ingredient, quantite);
     }
 
     public String printRecette() {
@@ -82,22 +71,11 @@ public class PlatSante implements PlatAuMenu {
             Map.Entry me = (Map.Entry) i.next();
             System.out.print(me.getKey() + " || Quantité: ");
             System.out.println(me.getValue());
-
         }
         return "FIN RECETTE";
     }
 
     public HashMap getRecette() {
         return recetteTable;
-    }
-
-    public double getKcal() { return kcal; }
-
-    public double getChol() {
-        return chol;
-    }
-
-    public double getGras() {
-        return gras;
     }
 }

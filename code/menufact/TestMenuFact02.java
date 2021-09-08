@@ -1,9 +1,11 @@
 package menufact;
 
+import ingredients.*;
 import menufact.facture.exceptions.FactureException;
 import menufact.exceptions.MenuException;
 import menufact.facture.Facture;
 import menufact.plats.PlatAuMenu;
+import menufact.plats.PlatRegulier;
 import menufact.plats.PlatChoisi;
 import menufact.plats.PlatSante;
 
@@ -14,11 +16,11 @@ public class TestMenuFact02 {
 
         TestMenuFact02 t = new TestMenuFact02();
 
-        PlatAuMenu p1 = new PlatAuMenu(0,"PlatAuMenu0",10);
-        PlatAuMenu p2 = new PlatAuMenu(1,"PlatAuMenu1",20);
-        PlatAuMenu p3 = new PlatAuMenu(2,"PlatAuMenu2",30);
-        PlatAuMenu p4 = new PlatAuMenu(3,"PlatAuMenu3",40);
-        PlatAuMenu p5 = new PlatAuMenu(4,"PlatAuMenu4",50);
+        PlatRegulier p1 = new PlatRegulier(0,"PlatAuMenu0",10);
+        PlatRegulier p2 = new PlatRegulier(1,"PlatAuMenu1",20);
+        PlatRegulier p3 = new PlatRegulier(2,"PlatAuMenu2",30);
+        PlatRegulier p4 = new PlatRegulier(3,"PlatAuMenu3",40);
+        PlatRegulier p5 = new PlatRegulier(4,"PlatAuMenu4",50);
 
 
         PlatSante ps1 = new PlatSante(10,"PlatSante0",10,11,11,11);
@@ -28,13 +30,14 @@ public class TestMenuFact02 {
         PlatSante ps5 = new PlatSante(14,"PlatSante4",50,11,11,11);
 
 
-        Menu m1 = new Menu("menufact.Menu 1");
-        Menu m2 = new Menu("menufact.Menu 2");
+        Menu m1 = Menu.getInstance("menufact.Menu 1");
+        Menu m2 = Menu.getInstance("menufact.Menu 2");
 
         Facture f1 = new Facture("Ma facture");
 
         Client c1 = new Client(1,"Mr Client","1234567890");
 
+        t.test13_CreerInventaire();
 
         t.test1_AffichePlatsAuMenu(trace, p1,p2,p3,p4,p5);
         t. test2_AffichePlatsSante(trace, ps1,ps2,ps3,ps4,ps5);
@@ -63,6 +66,8 @@ public class TestMenuFact02 {
 
         t.test8_AjouterClientFacture(f1, c1);
 
+        System.out.println("\n===TEST FACTURE OUVERTE===");
+
         try {
             t.test8_AjouterPlatsFacture(f1, m1,1);
         } catch (FactureException fe)
@@ -74,7 +79,11 @@ public class TestMenuFact02 {
             System.out.println(me);
         }
 
-        t.test9_PayerFacture(f1);
+        t.test10_SelectionnerUnPlat(1, f1);
+        t.test12_RetirerPlat(f1);
+        System.out.println(f1.genererFacture());
+
+        System.out.println("\n===TEST FACTURE FERMER===");
 
         try {
             t.test8_AjouterPlatsFacture(f1, m1,1);
@@ -94,18 +103,42 @@ public class TestMenuFact02 {
             System.out.println(fe.getMessage());
         }
 
+        t.test11_FermerFacture(f1);
+        t.test10_SelectionnerUnPlat(1, f1);
+        t.test12_RetirerPlat(f1);
+        System.out.println(f1.genererFacture());
 
+        System.out.println("\n===TEST FACTURE PAYEE===");
 
+        t.test9_PayerFacture(f1);
+        t.test10_SelectionnerUnPlat(1, f1);
+        t.test12_RetirerPlat(f1);
 
+        try {
+            t.test8_AjouterPlatsFacture(f1, m1,1);
+        } catch (FactureException fe)
+        {
+            System.out.println(fe.getMessage());
+        }
+        catch (MenuException me)
+        {
+            System.out.println(me);
+        }
 
+        try {
+            f1.ouvrir();
+        } catch (FactureException fe)
+        {
+            System.out.println(fe.getMessage());
+        }
 
         System.out.println("FIN DE TOUS LES TESTS...");
 
         System.out.println(f1.genererFacture());
     }
 
-    private void test1_AffichePlatsAuMenu(boolean trace, PlatAuMenu p1, PlatAuMenu p2,
-                                                 PlatAuMenu p3, PlatAuMenu p4, PlatAuMenu p5)
+    private void test1_AffichePlatsAuMenu(boolean trace, PlatRegulier p1, PlatRegulier p2,
+                                          PlatRegulier p3, PlatRegulier p4, PlatRegulier p5)
     {
         System.out.println("=== test1_AffichePlatsAuMenu");
         if(trace)
@@ -148,10 +181,10 @@ public class TestMenuFact02 {
 
 
     private void test4_AjoutPlatsAuMenu(boolean trace, Menu m1,
-                                        PlatAuMenu p1, PlatAuMenu p2,
+                                        PlatRegulier p1, PlatRegulier p2,
                                         PlatSante ps1, PlatSante ps2,
                                         Menu m2,
-                                        PlatAuMenu p3, PlatAuMenu p4,
+                                        PlatRegulier p3, PlatRegulier p4,
                                         PlatSante ps3, PlatSante ps4)
     {
         System.out.println("=== test4_AjoutPlatsAuMenu");
@@ -247,6 +280,7 @@ public class TestMenuFact02 {
         {
             throw fe;
         }
+
         System.out.println(f1);
     }
 
@@ -286,9 +320,132 @@ public class TestMenuFact02 {
         System.out.println("===test9_PayerFacture");
 
         System.out.println("Avant payer la facture");
-        System.out.println(f1);
-        f1.payer();
+        System.out.println(f1.genererFacture());
+
+        try {
+            f1.payer();
+        }catch (FactureException fe)
+        {
+            System.out.println(fe.getMessage());
+        }
+
         System.out.println("Apres avoir paye la facture");
-        System.out.println(f1);
+        System.out.println(f1.genererFacture());
+    }
+
+    private void test10_SelectionnerUnPlat(int index, Facture f)
+    {
+        System.out.println("===test10_SelectionnerUnPlat");
+
+        try {
+            f.selectionnerPlat(index);
+        }catch (FactureException fe)
+        {
+            System.out.println(fe.getMessage());
+        }
+    }
+
+    private void test11_FermerFacture(Facture f1)
+    {
+        System.out.println("===test11_FermerFacture");
+
+        System.out.println("Avant fermer la facture");
+        System.out.println(f1.genererFacture());
+
+        try {
+            f1.fermer();
+        }catch (FactureException fe)
+        {
+            System.out.println(fe.getMessage());
+        }
+
+        System.out.println("Apres avoir fermer la facture");
+        System.out.println(f1.genererFacture());
+    }
+
+    private void test12_RetirerPlat(Facture f1){
+        System.out.println("===test12_RetirerPlat");
+
+        try{
+            System.out.println("Avant retirer plat");
+            System.out.println(f1);
+            f1.retirerPlat();
+            System.out.println("Apres retirer plat");
+            System.out.println(f1);
+        }catch (FactureException fe){
+            System.out.println(fe.getMessage());
+        }
+    }
+
+    private void test13_CreerInventaire(){
+        try{
+            System.out.println("===test13_CreerInventaire");
+            Fruit banane = new Fruit("Banane", "Jaune", new Solide());
+            Fruit pomme = new Fruit("Pomme", "Rouge", new Solide());
+            Fruit ananas = new Fruit("Ananas", "Jaune", new Solide());
+            Fruit jusDePomme = new Fruit("Jus de Pomme", "Bio", new Liquide());
+            Fruit compotteDePomme = new Fruit("Compotte de Pomme", "Maison", new Liquide());
+
+            Viande poulet = new Viande("Poulet","Poitrine", new Solide());
+            Viande boeuf = new Viande("Boeuf","Cote", new Solide());
+            Viande bouillontDePoulet = new Viande("Bouillon de Poulet","Clair", new Liquide());
+            Viande bouillontDeBoeuf = new Viande("Bouillon de Boeuf","Fonce", new Liquide());
+
+            Legume poivron = new Legume("Poivron","Vert", new Solide());
+            Legume tomate = new Legume("Tomate","Italienne", new Solide());
+            Legume sauceTomate = new Legume("Sauce Tomate","Maison", new Liquide());
+            Legume huileOlive = new Legume("Huile d'olive","Extra Vierge", new Liquide());
+
+            Laitier beurre = new Laitier("Beurre","Demi-Sel", new Solide());
+            Laitier fromage = new Laitier("Fromage","Suisse", new Solide());
+            Laitier lait = new Laitier("Lait","2%", new Liquide());
+            Laitier creme = new Laitier("Creme","15%", new Liquide());
+
+            Epice sel = new Epice("Sel","De Mer", new Solide());
+            Epice poivre = new Epice("Poivre","Noir", new Solide());
+            Epice tabasco = new Epice("Tabasco","Epice", new Liquide());
+            Epice sauceSoja = new Epice("Sauce Soja","Du Quebec", new Liquide());
+
+            sel.setDescription("Kasher");
+            sel.setNom("Demi-Sel");
+            sel.setEtat(new Liquide());
+            sel.setTypeIngredient(TypeIngredient.FRUIT);
+
+            sel = new Epice("Sel","De Mer", new Solide());
+
+            IngredientInventaire storage = IngredientInventaire.getInstance();
+            //FRUIT
+            storage.setQuantite(banane, 20);
+            storage.setQuantite(pomme, 22);
+            storage.setQuantite(ananas, 20);
+            storage.setQuantite(jusDePomme, 22);
+            storage.setQuantite(compotteDePomme, 20);
+            //VIANDE
+            storage.setQuantite(poulet, 22);
+            storage.setQuantite(boeuf, 20);
+            storage.setQuantite(bouillontDePoulet, 22);
+            storage.setQuantite(bouillontDeBoeuf, 20);
+            //LEGUME
+            storage.setQuantite(poivron, 22);
+            storage.setQuantite(tomate, 20);
+            storage.setQuantite(sauceTomate, 22);
+            storage.setQuantite(sauceSoja, 20);
+            //LAITIER
+            storage.setQuantite(beurre, 22);
+            storage.setQuantite(fromage, 20);
+            storage.setQuantite(lait, 22);
+            storage.setQuantite(creme, 20);
+            //EPICE
+            storage.setQuantite(sel, 22);
+            storage.setQuantite(poivre, 20);
+            storage.setQuantite(tabasco, 22);
+            storage.setQuantite(sauceSoja, 20);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void test14_AjouterRecette(PlatAuMenu platAuMenu){
+        // TO-DO
     }
 }
