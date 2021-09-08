@@ -1,14 +1,23 @@
 package menufact.plats;
 
-import menufact.plats.PlatAuMenu;
+import ingredients.IngredientInventaire;
+import menufact.plats.EtatPlat.*;
 
 public class PlatChoisi {
     private PlatAuMenu plat;
     private int quantite;
+    private EtatPlat etat;
 
     public PlatChoisi(PlatAuMenu plat, int quantite) {
         this.plat = plat;
         this.quantite = quantite;
+
+        if(IngredientInventaire.getInstance().verifierInventaire(plat.getRecette())){
+            this.etat = new PlatCommande(this);
+        }else
+        {
+            this.etat = new PlatImpossibleAPreparer(this);
+        }
     }
 
     @Override
@@ -29,5 +38,21 @@ public class PlatChoisi {
 
     public PlatAuMenu getPlat() {
         return plat;
+    }
+
+    public void servir(){
+        etat.servir();
+    }
+
+    public void preparer(){
+        etat.preparer();
+    }
+
+    public void terminer(){
+        etat.terminer();
+    }
+
+    public void changerEtat(EtatPlat nouvelEtat){
+        etat = nouvelEtat;
     }
 }
