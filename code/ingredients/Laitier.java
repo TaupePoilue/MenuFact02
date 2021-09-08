@@ -1,11 +1,11 @@
 package ingredients;
 
-public class Viande extends Ingredient{
-    public Viande(String nom, String description, Etat etat)
+public class Laitier extends Ingredient{
+    public Laitier(String nom, String description, Etat etat)
     {
         setNom(nom);
         setDescription(description);
-        setTypeIngredient(TypeIngredient.VIANDE);
+        setTypeIngredient(TypeIngredient.LAITIER);
         setEtat(etat);
     }
 
@@ -18,5 +18,8 @@ public class Viande extends Ingredient{
                 + ". || Type: " + this.getTypeIngredient()
                 + ". || Etat: " + this.getEtat()
                 + ". || " + unite;
+        };
+
+
     }
-}
+

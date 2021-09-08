@@ -4,6 +4,7 @@ public class Ingredient {
     private String nom;
     private String description;
     private TypeIngredient typeIngredient;
+    protected Etat etat;
 
     public String getNom() {
         return nom;
@@ -25,7 +26,10 @@ public class Ingredient {
         return typeIngredient;
     }
 
-    public void setTypeIngredient(TypeIngredient typeIngredient) {
-        this.typeIngredient = typeIngredient;
-    }
+    public void setTypeIngredient(TypeIngredient typeIngredient) {this.typeIngredient = typeIngredient;}
+
+    public void setEtat(Etat etat) {this.etat = etat;}
+
+    public String getEtat() {return this.etat.toString();}
+
 }
