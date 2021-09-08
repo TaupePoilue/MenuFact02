@@ -84,7 +84,7 @@ public class TestIngredient {
             System.out.println("TestIngredient(sel_New): " + sel.toString());
 
             System.out.println(newLine + "=== INVENTAIRE HASHTABLE ===");
-            IngredientInventaire storage = new IngredientInventaire();
+            IngredientInventaire storage = IngredientInventaire.getInstance();
             //FRUIT
             storage.setQuantite(banane, 20);
             storage.setQuantite(pomme, 22);
