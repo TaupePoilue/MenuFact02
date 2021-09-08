@@ -9,8 +9,9 @@ public class Menu {
     private String description;
     private int courant;
     private ArrayList<PlatAuMenu> plat = new ArrayList<PlatAuMenu>();
+    private static Menu menu = null;
 
-    public Menu(String description) {
+    private Menu(String description) {
         this.description = description;
     }
 
@@ -45,7 +46,12 @@ public class Menu {
             courant--;
     }
 
-
+    public static Menu getInstance(String description){
+        if (menu == null){
+            menu = new Menu(description);
+        }
+        return menu;
+    }
     @Override
     public String toString() {
         return "menufact.Menu{" +
