@@ -1,8 +1,6 @@
 package menufact.plats;
 
-import menufact.plats.PlatAuMenu;
-
-public class PlatSante implements Plat {
+public class PlatSante implements PlatAuMenu {
     private int code;
     private String description;
     private double prix;

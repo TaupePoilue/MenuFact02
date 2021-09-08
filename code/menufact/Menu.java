@@ -2,6 +2,7 @@ package menufact;
 
 import menufact.exceptions.MenuException;
 import menufact.plats.PlatAuMenu;
+import menufact.plats.PlatRegulier;
 
 import java.util.ArrayList;
 

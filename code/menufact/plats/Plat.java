@@ -1,6 +1,6 @@
 package menufact.plats;
 
-public interface Plat {
+public interface PlatAuMenu {
 
     void CreerPlat();
     int getCode();

@@ -11,5 +11,4 @@ public class Inventaire {
     {
         lesIngredients.add(ingredient);
     }
-
 }

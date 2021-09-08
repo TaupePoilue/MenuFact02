@@ -1,18 +1,18 @@
 package menufact.plats;
 
-public class PlatAuMenu implements Plat {
+public class PlatRegulier implements PlatAuMenu {
     private int code;
     private String description;
     private double prix;
 
-    public PlatAuMenu(int code, String description, double prix) {
+    public PlatRegulier(int code, String description, double prix) {
         this.code = code;
         this.description = description;
         this.prix = prix;
     }
     public void CreerPlat(){}
 
-    public PlatAuMenu() {
+    public PlatRegulier() {
     }
 
     @Override

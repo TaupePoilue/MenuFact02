@@ -10,11 +10,11 @@ public class TestPlat {
             System.out.println("===Creation de 3 plats===");
 
             PlatFactory platFactory = new PlatFactory();
-            Plat plat1 = platFactory.creerPlat(1,"Frite",12.50);
+            PlatAuMenu plat1 = platFactory.creerPlatRegulier(1,"Frite",12.50);
             System.out.println("plat1: " + plat1.toString());
-            Plat plat2 = platFactory.creerPlatEnfant(2,"Tomate",12.50,0.5);
+            PlatAuMenu plat2 = platFactory.creerPlatEnfant(2,"Tomate",12.50,0.5);
             System.out.println("plat2: " + plat2.toString());
-            Plat plat3 = platFactory.creerPlatSante(3,"Apple",12.50,50,40,10);
+            PlatAuMenu plat3 = platFactory.creerPlatSante(3,"Apple",12.50,50,40,10);
             System.out.println("plat3: " + plat3.toString());
             System.out.println();
             //CODE
@@ -79,7 +79,7 @@ public class TestPlat {
 
         TestPlat tp = new TestPlat();
 
-        PlatAuMenu p1 = new PlatAuMenu();
+        PlatRegulier p1 = new PlatRegulier();
         PlatChoisi platChoisi = new PlatChoisi(p1, 2);
 
         try {

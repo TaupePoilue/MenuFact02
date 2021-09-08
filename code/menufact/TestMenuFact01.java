@@ -1,7 +1,7 @@
 package menufact;
 
 import menufact.facture.Facture;
-import menufact.plats.PlatAuMenu;
+import menufact.plats.PlatRegulier;
 import menufact.plats.PlatChoisi;
 import menufact.plats.PlatSante;
 
@@ -10,11 +10,11 @@ public class TestMenuFact01 {
 
         try {
             System.out.println("===menufact.plats.PlatAuMenu Constructeur 3 arguments");
-            PlatAuMenu p1 = new PlatAuMenu(0, "Frites sauce", 11.50);
+            PlatRegulier p1 = new PlatRegulier(0, "Frites sauce", 11.50);
             System.out.println(p1);
 
             System.out.println("===menufact.plats.PlatAuMenu Constructeur 3 arguments");
-            PlatAuMenu p2 = new PlatAuMenu(1, "Frites", 10.25);
+            PlatRegulier p2 = new PlatRegulier(1, "Frites", 10.25);
             System.out.println(p2);
 
             System.out.println("===menufact.plats.PlatSante Constructeur 5 arguments");
@@ -26,7 +26,7 @@ public class TestMenuFact01 {
             System.out.println(ps2);
 
             System.out.println("===menufact.Menu ajout avec 4 plats");
-            Menu menu = new Menu("Menu1");
+            Menu menu = Menu.getInstance("Menu1");
             menu.ajoute(p1);
             menu.ajoute(p2);
             menu.ajoute(ps1);

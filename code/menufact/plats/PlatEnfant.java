@@ -1,6 +1,6 @@
 package menufact.plats;
 
-public class PlatEnfant implements Plat {
+public class PlatEnfant implements PlatAuMenu {
     private int code;
     private String description;
     private double prix;
