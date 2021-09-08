@@ -1,11 +1,11 @@
 package ingredients;
 
-public class Viande extends Ingredient{
-    public Viande(String nom, String description, Etat etat)
+public class Epice extends Ingredient{
+    public Epice(String nom, String description, Etat etat)
     {
         setNom(nom);
         setDescription(description);
-        setTypeIngredient(TypeIngredient.VIANDE);
+        setTypeIngredient(TypeIngredient.EPICE);
         setEtat(etat);
     }
 
