@@ -28,21 +28,43 @@ public class Facture {
     /**Definition des possibles etats de Facture*/
 
     public class FactureEtat {
-        public void ouvrir(){}
+        public void ouvrir() throws FactureException {
+            throw new FactureException("Action imposible");
+        }
 
-        public void fermer(){}
+        public void fermer() throws  FactureException{
+            throw new FactureException("Action imposible");
+        }
 
-        public void payer(){}
+        public void payer() throws FactureException{
+            throw new FactureException("Action imposible");
+        }
 
-        public void selectionnerPlat(PlatChoisi plat){}
+        public void selectionnerPlat(PlatChoisi plat) throws  FactureException {
+            throw new FactureException("Action imposible");
+        }
 
-        public void retirerPlat(){}
+        public void retirerPlat() throws FactureException{
+            throw new FactureException("Action imposible");
+        }
 
-        public void ajouterPlat(PlatChoisi plat) throws FactureException { throw new FactureException("Un plat peut seulement être ajouter à une facture OUVERTE."); }
+        public void ajouterPlat(PlatChoisi plat) throws FactureException {
+            throw new FactureException("Un plat peut seulement être ajouter à une facture OUVERTE."); }
     }
 
     public class FactureFermer extends FactureEtat {
+        @Override
+        public void ouvrir() throws FactureException {
+            changerEtat(new FactureOuverte());
+        }
 
+        @Override
+        public void fermer() throws FactureException {}
+
+        @Override
+        public void payer() throws FactureException {
+            changerEtat(new FacturePayee());
+        }
     }
 
     public class FactureOuverte extends FactureEtat {
@@ -67,6 +89,7 @@ public class Facture {
     }
 
     public class FacturePayee extends FactureEtat {
+        
     }
 
     /**
@@ -117,14 +140,14 @@ public class Facture {
     /**
      * Permet de chager l'état de la facture à PAYEE
      */
-    public void payer()
+    public void payer()  throws FactureException
     {
        etat.payer();
     }
     /**
      * Permet de chager l'état de la facture à FERMEE
      */
-    public void fermer()
+    public void fermer() throws FactureException
     {
        etat.fermer();
     }
@@ -168,6 +191,15 @@ public class Facture {
         etat.ajouterPlat(p);
     }
 
+    public void selectionnerPlat(PlatChoisi plat) throws FactureException
+    {
+        etat.selectionnerPlat(plat);
+    }
+
+    public void retirerPlat() throws FactureException
+    {
+        etat.retirerPlat();
+    }
     /**
      *
      * @return le contenu de la facture en chaîne de caracteres

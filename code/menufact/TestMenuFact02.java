@@ -287,7 +287,13 @@ public class TestMenuFact02 {
 
         System.out.println("Avant payer la facture");
         System.out.println(f1);
-        f1.payer();
+        try
+        {
+            f1.payer();
+        }catch (FactureException fe)
+        {
+            System.out.println(fe.getMessage());
+        }
         System.out.println("Apres avoir paye la facture");
         System.out.println(f1);
     }
