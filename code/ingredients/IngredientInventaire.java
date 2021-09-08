@@ -32,12 +32,14 @@ public class IngredientInventaire {
     public String toString(){
         System.out.println("Inventaire: ");
         Set set = itemsTable.entrySet();
+        Ingredient ingredientTest = new Ingredient();
         // Get an iterator
         Iterator i = set.iterator();
         // Display elements
         while(i.hasNext()) {
             Map.Entry me = (Map.Entry)i.next();
             System.out.print(me.getKey() + " || Quantité: ");
+            ingredientTest = (Ingredient) me.getKey();
             System.out.println(me.getValue());
 
         }
