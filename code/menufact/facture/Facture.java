@@ -20,6 +20,7 @@ public class Facture {
     private ArrayList<PlatChoisi> platchoisi = new ArrayList<PlatChoisi>();
     private int courant;
     private Client client;
+    private PlatChoisi platSelectionne;
 
 
     /**********************Constantes ************/
@@ -189,6 +190,10 @@ public class Facture {
      */
     public void ajoutePlat(PlatChoisi p) throws FactureException
     {
+        if(p.toString().equals("PlatImposibleAPreparer")){
+            throw new FactureException("Imposible d'ajouter le plat a la facture; Plat imposible a preparer");
+        }
+
         etat.ajouterPlat(p);
         notifierChef(p);
     }

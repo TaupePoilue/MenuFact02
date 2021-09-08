@@ -3,6 +3,7 @@ package menufact.plats.EtatPlat;
 import menufact.plats.PlatChoisi;
 
 public class PlatCommande extends EtatPlat{
+
     public PlatCommande(PlatChoisi platChoisi) {
         super(platChoisi);
     }
@@ -14,6 +15,6 @@ public class PlatCommande extends EtatPlat{
 
     @Override
     public String toString() {
-        return "Plat Commande.";
+        return "PlatCommande";
     }
 }

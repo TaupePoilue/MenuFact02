@@ -3,6 +3,7 @@ package menufact.plats.EtatPlat;
 import menufact.plats.PlatChoisi;
 
 public class PlatEnPreparation extends EtatPlat{
+
     public PlatEnPreparation(PlatChoisi p) {
         super(p);
         //Retirer les ingredients de l'inventaire (A Faire)
@@ -16,6 +17,6 @@ public class PlatEnPreparation extends EtatPlat{
 
     @Override
     public String toString() {
-        return "Plat en preparation.";
+        return "PlatEnPreparation";
     }
 }

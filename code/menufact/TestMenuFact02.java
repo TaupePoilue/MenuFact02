@@ -246,6 +246,7 @@ public class TestMenuFact02 {
         {
             throw fe;
         }
+
         System.out.println(f1);
     }
 
@@ -296,4 +297,6 @@ public class TestMenuFact02 {
         System.out.println("Apres avoir paye la facture");
         System.out.println(f1);
     }
+
+
 }
