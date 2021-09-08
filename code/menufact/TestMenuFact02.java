@@ -63,6 +63,8 @@ public class TestMenuFact02 {
 
         t.test8_AjouterClientFacture(f1, c1);
 
+        System.out.println("\n===TEST FACTURE OUVERTE===");
+
         try {
             t.test8_AjouterPlatsFacture(f1, m1,1);
         } catch (FactureException fe)
@@ -74,7 +76,11 @@ public class TestMenuFact02 {
             System.out.println(me);
         }
 
-        t.test9_PayerFacture(f1);
+        t.test10_SelectionnerUnPlat(1, f1);
+        t.test12_RetirerPlat(f1);
+        System.out.println(f1.genererFacture());
+
+        System.out.println("\n===TEST FACTURE FERMER===");
 
         try {
             t.test8_AjouterPlatsFacture(f1, m1,1);
@@ -94,10 +100,34 @@ public class TestMenuFact02 {
             System.out.println(fe.getMessage());
         }
 
+        t.test11_FermerFacture(f1);
+        t.test10_SelectionnerUnPlat(1, f1);
+        t.test12_RetirerPlat(f1);
+        System.out.println(f1.genererFacture());
 
+        System.out.println("\n===TEST FACTURE PAYEE===");
 
+        t.test9_PayerFacture(f1);
+        t.test10_SelectionnerUnPlat(1, f1);
+        t.test12_RetirerPlat(f1);
 
+        try {
+            t.test8_AjouterPlatsFacture(f1, m1,1);
+        } catch (FactureException fe)
+        {
+            System.out.println(fe.getMessage());
+        }
+        catch (MenuException me)
+        {
+            System.out.println(me);
+        }
 
+        try {
+            f1.ouvrir();
+        } catch (FactureException fe)
+        {
+            System.out.println(fe.getMessage());
+        }
 
         System.out.println("FIN DE TOUS LES TESTS...");
 
@@ -287,7 +317,7 @@ public class TestMenuFact02 {
         System.out.println("===test9_PayerFacture");
 
         System.out.println("Avant payer la facture");
-        System.out.println(f1);
+        System.out.println(f1.genererFacture());
 
         try {
             f1.payer();
@@ -297,8 +327,50 @@ public class TestMenuFact02 {
         }
 
         System.out.println("Apres avoir paye la facture");
-        System.out.println(f1);
+        System.out.println(f1.genererFacture());
     }
 
+    private void test10_SelectionnerUnPlat(int index, Facture f)
+    {
+        System.out.println("===test10_SelectionnerUnPlat");
 
+        try {
+            f.selectionnerPlat(index);
+        }catch (FactureException fe)
+        {
+            System.out.println(fe.getMessage());
+        }
+    }
+
+    private void test11_FermerFacture(Facture f1)
+    {
+        System.out.println("===test11_FermerFacture");
+
+        System.out.println("Avant fermer la facture");
+        System.out.println(f1.genererFacture());
+
+        try {
+            f1.fermer();
+        }catch (FactureException fe)
+        {
+            System.out.println(fe.getMessage());
+        }
+
+        System.out.println("Apres avoir fermer la facture");
+        System.out.println(f1.genererFacture());
+    }
+
+    private void test12_RetirerPlat(Facture f1){
+        System.out.println("===test12_RetirerPlat");
+
+        try{
+            System.out.println("Avant retirer plat");
+            System.out.println(f1);
+            f1.retirerPlat();
+            System.out.println("Apres retirer plat");
+            System.out.println(f1);
+        }catch (FactureException fe){
+            System.out.println(fe.getMessage());
+        }
+    }
 }

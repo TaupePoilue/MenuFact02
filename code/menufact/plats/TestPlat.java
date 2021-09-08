@@ -1,6 +1,8 @@
 package menufact.plats;
 
 
+import menufact.plats.EtatPlat.PlatEnPreparation;
+
 public class TestPlat {
     public static void main(String[] args) {
 
@@ -75,7 +77,7 @@ public class TestPlat {
             System.out.println(fe.getMessage());
         }
 
-        System.out.println("===TEST PLATCHOISI===");
+        System.out.println("===TEST ETAT PLATCHOISI=== \n");
 
         TestPlat tp = new TestPlat();
 
@@ -83,24 +85,27 @@ public class TestPlat {
         PlatChoisi platChoisi = new PlatChoisi(p1, 2);
 
         try {
+            System.out.println("Test1 - Preparer plat");
             tp.test1_PreparerPlatChoisi(platChoisi);
-            System.out.println("Test1 - REUSSI");
+            System.out.println("REUSSI");
         } catch (Exception e)
         {
             System.out.println(e.getMessage());
         }
 
         try {
+            System.out.println("Test2 - Terminer plat");
             tp.test2_TerminerPlatChoisi(platChoisi);
-            System.out.println("Test2 - REUSSI");
+            System.out.println("REUSSI");
         } catch (Exception e)
         {
             System.out.println(e.getMessage());
         }
 
         try {
+            System.out.println("Test3 - Servir plat");
             tp.test3_ServirPlatChoisi(platChoisi);
-            System.out.println("Test3 - REUSSI");
+            System.out.println("REUSSI");
         } catch (Exception e)
         {
             System.out.println(e.getMessage());
@@ -108,23 +113,22 @@ public class TestPlat {
     }
 
     public void test1_PreparerPlatChoisi(PlatChoisi p) throws Exception{
-        System.out.println("===Test1");
         p.preparer();
-        if(!p.toString().equals("PlatEnPreparation")){
+        if(p.getClass().toString().equals("PlatEnPreparation")){
             throw new Exception("Test1 - ECHEC");
         }
     }
 
     public void test2_TerminerPlatChoisi(PlatChoisi p) throws Exception{
         p.terminer();
-        if(!p.toString().equals("PlatTermine")){
+        if(p.getClass().toString().equals("PlatTermine")){
             throw new Exception("Test2 - ECHEC");
         }
     }
 
     public void test3_ServirPlatChoisi(PlatChoisi p) throws Exception{
         p.servir();
-        if(!p.toString().equals("PlatServi")){
+        if(p.getClass().toString().equals("PlatServi")){
             throw new Exception("Test3 - ECHEC");
         }
     }
