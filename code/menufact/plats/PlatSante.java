@@ -1,6 +1,7 @@
 package menufact.plats;
 
 import ingredients.Ingredient;
+import ingredients.IngredientInventaire;
 import menufact.plats.PlatAuMenu;
 
 import java.util.HashMap;
@@ -32,6 +33,10 @@ public class PlatSante implements PlatAuMenu {
     }
 
     @Override
+    /**
+     *
+     * @return les caracteristique du plat sante en chaine de caractere
+     */
     public String toString() {
         return "menufact.plats.PlatSante{" +
                 "kcal=" + kcal +
@@ -44,26 +49,50 @@ public class PlatSante implements PlatAuMenu {
                 "}\n";
     }
 
+    /**
+     *
+     * @return le code du plat
+     */
     public int getCode() {
         return code;
     }
 
+    /**
+     *
+     * @param code le code du plat
+     */
     public void setCode(int code) {
         this.code = code;
     }
 
+    /**
+     *
+     * @return la description du plat en chaine de caractere
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description la description du du plat
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @return le prix du plat
+     */
     public double getPrix() {
         return prix;
     }
 
+    /**
+     *
+     * @param prix le prix du plat
+     */
     public void setPrix(double prix) {
         this.prix = prix;
     }
@@ -72,6 +101,10 @@ public class PlatSante implements PlatAuMenu {
         this.recetteTable.put(ingredient, quantite);
     }
 
+    /**
+     *
+     * @return la composition de la recette, donc l'ingredient suivit de sa quantite en chaine de caractere
+     */
     public String printRecette() {
         System.out.println("Recette: ");
         Set set = recetteTable.entrySet();
@@ -87,16 +120,41 @@ public class PlatSante implements PlatAuMenu {
         return "FIN RECETTE";
     }
 
+    /**
+     *
+     * @param ingredient l'ingredient sous forme de chaine de caractere a ajouter dans la recette
+     * @param quantite la quantite de l'ingredient a ajouter dans la recette
+     */
+    public void ajoutIngredientRecetteString(String ingredient,int quantite ){
+        ajoutIngredientRecette(IngredientInventaire.getInstance().getIngredient(ingredient), quantite);
+    }
+
+    /**
+     *
+     * @return un Hashmap de la recette
+     */
     public HashMap getRecette() {
         return recetteTable;
     }
 
+    /**
+     *
+     * @return les kcal du plat sante
+     */
     public double getKcal() { return kcal; }
 
+    /**
+     *
+     * @return le Chol du plat sante
+     */
     public double getChol() {
         return chol;
     }
 
+    /**
+     *
+     * @return le grass du plat sante
+     */
     public double getGras() {
         return gras;
     }

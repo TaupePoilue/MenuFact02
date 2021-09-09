@@ -86,6 +86,7 @@ public class TestMenuFact02 {
         System.out.println("\n===TEST FACTURE FERMER===");
 
         try {
+            t.test14_AjouterRecette(p1,"banane",100);
             t.test8_AjouterPlatsFacture(f1, m1,1);
         } catch (FactureException fe)
         {
@@ -445,7 +446,9 @@ public class TestMenuFact02 {
         }
     }
 
-    public void test14_AjouterRecette(PlatAuMenu platAuMenu){
-        // TO-DO
+    public void test14_AjouterRecette(PlatAuMenu platAuMenu, String ingredient, int quantite){
+        System.out.println("===test14_AjouterRecette");
+        platAuMenu.ajoutIngredientRecetteString(ingredient, quantite);
+
     }
 }

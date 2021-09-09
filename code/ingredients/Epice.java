@@ -1,6 +1,13 @@
 package ingredients;
 
 public class Epice extends Ingredient{
+
+    /**
+     *
+     * @param nom le nom de l'epice
+     * @param description une caractéristique de l'epice
+     * @param etat l'etat de l'epice
+     */
     public Epice(String nom, String description, Etat etat)
     {
         setNom(nom);
@@ -9,6 +16,10 @@ public class Epice extends Ingredient{
         setEtat(etat);
     }
 
+    /**
+     *
+     * @return le contenu de l'epice en chaîne de caracteres
+     */
     public String toString() {
         String unite;
         if (this.getEtat() == "Liquide"){unite = "Unite: millilitre";}
