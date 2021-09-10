@@ -15,6 +15,7 @@ public interface PlatAuMenu {
     double getPrix();
     void setPrix(double prix);
     void ajoutIngredientRecette(Ingredient ingredient,int quantite);
+    void ajoutIngredientRecetteString(String ingredient, int quantite);
     String printRecette();
     HashMap getRecette();
 }

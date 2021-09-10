@@ -1,6 +1,13 @@
 package ingredients;
 
 public class Viande extends Ingredient{
+
+    /**
+     *
+     * @param nom le nom de la Viande
+     * @param description une caractéristique de la Viande
+     * @param etat l'etat de la Viande
+     */
     public Viande(String nom, String description, Etat etat)
     {
         setNom(nom);
@@ -9,6 +16,10 @@ public class Viande extends Ingredient{
         setEtat(etat);
     }
 
+    /**
+     *
+     * @return le contenu de la Viande en chaîne de caracteres
+     */
     public String toString() {
         String unite;
         if (this.getEtat().toString() == "Liquide"){unite = "Unite: millilitre";}

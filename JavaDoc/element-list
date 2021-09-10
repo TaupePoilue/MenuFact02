@@ -1,0 +1,9 @@
+ingredients
+ingredients.exceptions
+inventaire
+menufact
+menufact.exceptions
+menufact.facture
+menufact.facture.exceptions
+menufact.plats
+menufact.plats.EtatPlat

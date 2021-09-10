@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ingredients"},{"l":"ingredients.exceptions"},{"l":"inventaire"},{"l":"menufact"},{"l":"menufact.exceptions"},{"l":"menufact.facture"},{"l":"menufact.facture.exceptions"},{"l":"menufact.plats"},{"l":"menufact.plats.EtatPlat"}];updateSearchResults();

@@ -1,6 +1,13 @@
 package ingredients;
 
 public class Legume extends Ingredient{
+
+    /**
+     *
+     * @param nom le nom du Legume
+     * @param description une caractéristique du Legume
+     * @param etat l'etat du Legume
+     */
     public Legume(String nom, String description, Etat etat)
     {
         setNom(nom);
@@ -9,6 +16,10 @@ public class Legume extends Ingredient{
         setEtat(etat);
     }
 
+    /**
+     *
+     * @return le contenu du Legume en chaîne de caracteres
+     */
     public String toString() {
         String unite;
         if (this.getEtat().toString() == "Liquide"){unite = "Unite: millilitre";}
