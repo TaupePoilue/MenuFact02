@@ -29,14 +29,20 @@ public class Facture {
     /**Definition des possibles etats de Facture*/
 
     public class FactureEtat {
+
+        /**Ouvre la facture - Impossible si la facture est PAYEE*/
         public void ouvrir() throws FactureException {}
 
+        /**FERME la facture - Impossible si la facture est PAYEE*/
         public void fermer() throws  FactureException{}
 
+        /**PAYE la facture*/
         public void payer() throws FactureException{}
 
+        /**@param index Index du plat qui sera selectionner, donc le prochain plat courrant*/
         public void selectionnerPlat(int index) throws  FactureException {}
 
+        /** Retire le plat courrant*/
         public void retirerPlat() throws FactureException{}
 
         /** Ajoute un plat a la Facture seulement si elle est OUVERTE
@@ -302,16 +308,20 @@ public class Facture {
         }
     }
 
+    /**@param index Index du plat qui sera selectionne*/
     public void selectionnerPlat(int index) throws FactureException
     {
         etat.selectionnerPlat(index);
     }
 
+    /** Retire le plat courrant*/
     public void retirerPlat() throws FactureException
     {
         etat.retirerPlat();
     }
-    
+
+    /**Notifie le chef lorsqu'un plat est ajoute a la facture
+     * @param p Un plat qui a ete ajoute a la facture*/
     public void notifierChef(PlatChoisi p) throws PlatException{
         Chef.getInstance().recevoirCommande(p);
     }

@@ -16,6 +16,8 @@ public class Menu {
         this.description = description;
     }
 
+    /**@param p Un PlatAuMenu qui sera ajouter au menu
+     * @return Un booleen qui indique la reussite de l'operation*/
     public boolean ajoute (PlatAuMenu p)
     {
         try{
@@ -25,17 +27,19 @@ public class Menu {
         }
         return true;
     }
-
+    /** @param  i Indexe du plat qui sera selectionner*/
     public void position(int i)
     {
         courant = i;
     }
 
+    /** @return Le plat qui est selectionner*/
     public PlatAuMenu platCourant()
     {
         return plat.get(courant);
     }
 
+    /** Change la position du plat courant pour le plat suivant*/
     public void positionSuivante() throws MenuException
     {
         if (courant+1 >= plat.size())
@@ -44,6 +48,7 @@ public class Menu {
             courant++;
     }
 
+    /** Change la position du plat courant pour le plat precedant*/
     public void positionPrecedente() throws MenuException
     {
         if (courant-1 < 0)
@@ -52,6 +57,8 @@ public class Menu {
             courant--;
     }
 
+    /** @param description Description du menu
+     * @return Retourne l'instance du menu*/
     public static Menu getInstance(String description){
         if (menu == null){
             menu = new Menu(description);

@@ -16,6 +16,7 @@ public class Chef {
         return chef;
     }
 
+    /**@param p Le plat qui a ete ajoute a une facture*/
     public void recevoirCommande(PlatChoisi p) throws PlatException {
         p.preparer();
         p.terminer();
