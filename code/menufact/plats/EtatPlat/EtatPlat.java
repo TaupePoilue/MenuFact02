@@ -1,6 +1,7 @@
 package menufact.plats.EtatPlat;
 
 import menufact.plats.PlatChoisi;
+import menufact.plats.exceptions.PlatException;
 
 public class EtatPlat {
 
@@ -10,9 +11,9 @@ public class EtatPlat {
         platChoisi = p;
     }
 
-    public void preparer(){}
+    public void preparer() throws  PlatException{ throw new PlatException("Plat impossible a preparer");}
 
-    public void terminer(){}
+    public void terminer() throws PlatException { throw new PlatException("Plat impossible a terminer");}
 
-    public void servir(){}
+    public void servir() throws  PlatException{ throw new PlatException("Plat impossible a servir");}
 }

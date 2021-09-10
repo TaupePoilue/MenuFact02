@@ -11,7 +11,7 @@ public class Legume extends Ingredient{
 
     public String toString() {
         String unite;
-        if (this.getEtat() == "Liquide"){unite = "Unite: millilitre";}
+        if (this.getEtat().toString() == "Liquide"){unite = "Unite: millilitre";}
         else {unite = "Unite: gramme";}
         return "Ingredient: " + this.getNom()
                 + ". || Descripion: " + this.getDescription()

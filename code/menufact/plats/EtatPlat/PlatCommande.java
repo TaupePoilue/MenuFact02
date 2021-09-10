@@ -2,6 +2,7 @@ package menufact.plats.EtatPlat;
 
 import ingredients.IngredientInventaire;
 import menufact.plats.PlatChoisi;
+import menufact.plats.exceptions.PlatException;
 
 public class PlatCommande extends EtatPlat{
 
@@ -10,7 +11,7 @@ public class PlatCommande extends EtatPlat{
     }
 
     @Override
-    public void preparer(){
+    public void preparer() throws PlatException {
         IngredientInventaire.getInstance().soustraireQuantite(platChoisi.getPlat().getRecette());
         platChoisi.changerEtat(new PlatEnPreparation(platChoisi));
     }

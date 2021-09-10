@@ -16,9 +16,14 @@ public class Menu {
         this.description = description;
     }
 
-    void ajoute (PlatAuMenu p)
+    public boolean ajoute (PlatAuMenu p)
     {
-        plat.add(p);
+        try{
+            plat.add(p);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     public void position(int i)
@@ -53,6 +58,7 @@ public class Menu {
         }
         return menu;
     }
+
     @Override
     public String toString() {
         return "menufact.Menu{" +

@@ -30,6 +30,6 @@ public class Ingredient {
 
     public void setEtat(Etat etat) {this.etat = etat;}
 
-    public String getEtat() {return this.etat.toString();}
+    public Etat getEtat() {return this.etat;}
 
 }

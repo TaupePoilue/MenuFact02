@@ -4,6 +4,7 @@ import menufact.Chef;
 import menufact.Client;
 import menufact.facture.exceptions.FactureException;
 import menufact.plats.PlatChoisi;
+import menufact.plats.exceptions.PlatException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,6 +39,8 @@ public class Facture {
 
         public void retirerPlat() throws FactureException{}
 
+        /** Ajoute un plat a la Facture seulement si elle est OUVERTE
+         * @param plat - un plat choisi*/
         public void ajouterPlat(PlatChoisi plat) throws FactureException {
             throw new FactureException("Un plat peut seulement être ajouter à une facture OUVERTE."); }
 
@@ -291,12 +294,12 @@ public class Facture {
      */
     public void ajoutePlat(PlatChoisi p) throws FactureException
     {
-        if(p.toString().equals("PlatImposibleAPreparer")){
-            throw new FactureException("Imposible d'ajouter le plat a la facture; Plat imposible a preparer");
+        try{
+            notifierChef(p);
+            etat.ajouterPlat(p);
+        }catch (PlatException pe){
+            throw new FactureException(pe.getMessage());
         }
-
-        etat.ajouterPlat(p);
-        notifierChef(p);
     }
 
     public void selectionnerPlat(int index) throws FactureException
@@ -309,7 +312,7 @@ public class Facture {
         etat.retirerPlat();
     }
     
-    public void notifierChef(PlatChoisi p){
+    public void notifierChef(PlatChoisi p) throws PlatException{
         Chef.getInstance().recevoirCommande(p);
     }
 
